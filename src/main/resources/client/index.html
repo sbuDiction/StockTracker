@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chocolate stock</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<script type='text/template' class="stockList">
+    <div style="width: 600px;" class="stockTable">
+        <table class="ui celled table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Qty</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each stock}}
+                <tr>
+                    <td data-label="Name">{{this.name}}</td>
+                    <td data-label="Age">{{this.qty}}</td>
+                </tr>
+
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</script>
+
+
+<script type='text/template' class="addStock">
+    <a style="padding-top: 20px;" href="stock"><i class="left arrow icon divider"></i>back</a>
+    
+    <form action="/add_choco" method="POST">
+        <div class="ui mini icon input">
+            <input class="item" name="item" type="text" placeholder="add chocolate">
+            <i class="search number"></i>
+          </div>
+          <label for="">qty</label>
+          <input name="qty" class="form-control-sm qty" type="number" value="0" data-decimals="0" min="0" max="1000" step="1"/>
+          <button type="submit" class="ui primary button updateStock">
+            Add
+          </button>
+    </form>
+ 
+    
+</script>
+
+<body>
+
+    <div class="container">
+        <h1>Welcome to chocolate stock tracker</h1>
+
+        <div class="ui raised very padded text container segment mainContent">
+            <!-- display content -->
+        </div>
+
+        <button class="positive ui button add">Add chocolate</button>
+        <button class="negative ui button eat">Eat chocolate</button>
+    </div>
+
+
+</body>
+<script src="./js/api.js"></script>
+
+</html>

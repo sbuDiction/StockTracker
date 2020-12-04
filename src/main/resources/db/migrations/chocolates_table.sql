@@ -1,0 +1,6 @@
+CREATE TABLE CHOCOLATE
+(
+    id SERIAL PRIMARY KEY NOT NULL,
+    name TEXT,
+    qty INT
+)
