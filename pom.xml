@@ -54,6 +54,7 @@
                     <processTypes>
                         <!-- Tell Heroku how to launch your application -->
                         <!-- You might have to remove the ./ in front   -->
+
                         <web>java $JAVA_OPTS -cp target/classes:target/dependency/* stock.tracker.App</web>
                     </processTypes>
                 </configuration>
