@@ -14,7 +14,7 @@ public class DataAccessObjectImplementation implements DataAccessObject {
 
     public DataAccessObjectImplementation() throws URISyntaxException {
         try {
-            port(StockDatabaseConnection.getHerokuAssignedPort());
+
             jdbi.installPlugin(new SqlObjectPlugin());
         } catch (Exception e) {
             e.printStackTrace();
