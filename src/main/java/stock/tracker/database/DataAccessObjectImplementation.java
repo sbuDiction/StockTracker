@@ -7,11 +7,14 @@ import stock.tracker.mappings.ChocolateMapping;
 import java.net.URISyntaxException;
 import java.util.List;
 
+import static spark.Spark.port;
+
 public class DataAccessObjectImplementation implements DataAccessObject {
     private final Jdbi jdbi = StockDatabaseConnection.getJdbiDatabaseConnection();
 
     public DataAccessObjectImplementation() throws URISyntaxException {
         try {
+            port(StockDatabaseConnection.getHerokuAssignedPort());
             jdbi.installPlugin(new SqlObjectPlugin());
         } catch (Exception e) {
             e.printStackTrace();
