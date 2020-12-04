@@ -38,6 +38,8 @@ updateStock.addEventListener('click', () => {
     }
 
     axios.post('/add_choco', params).then(results => {
+        console.log(results.data);
+        
     })
 })
 

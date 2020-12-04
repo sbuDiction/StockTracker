@@ -28,6 +28,6 @@ public class StockApi {
         String qty = request.queryParams("qty");
 
         chocolateStockTracker.addToStock(item,Integer.parseInt(qty));
-        return "";
+        return "Success";
     }
 }
