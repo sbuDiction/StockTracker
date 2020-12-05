@@ -18,8 +18,11 @@ public class StockApi {
         return this::handle2;
     }
 
-    private Object handle1(Request request, Response response) throws URISyntaxException {
+    public Route eatChocolate() {
+        return this::handle3;
+    }
 
+    private Object handle1(Request request, Response response) throws URISyntaxException {
         return chocolateStockTracker.getStock();
     }
 
@@ -27,7 +30,30 @@ public class StockApi {
         String item = request.queryParams("item");
         String qty = request.queryParams("qty");
 
-        chocolateStockTracker.addToStock(item,Integer.parseInt(qty));
-        return "Success";
+        if (chocolateStockTracker.getChocolate(item).size() == 1) {
+            chocolateStockTracker.updateStock(item);
+            System.out.println(chocolateStockTracker.getMessage());
+        } else {
+            chocolateStockTracker.addToStock(item, Integer.parseInt(qty));
+        }
+        response.redirect("index.html");
+        return null;
     }
+
+    private Object handle3(Request request, Response response) {
+        request.queryMap().toMap().keySet().forEach(key -> {
+            try {
+                if (chocolateStockTracker.getChocolate(key).size() == 1) {
+                    chocolateStockTracker.updateStock(key);
+                } else {
+                    chocolateStockTracker.eatChocolate(key);
+                }
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+        });
+        response.redirect("index.html");
+        return null;
+    }
+
 }

@@ -26,6 +26,7 @@ if [[ "$db_name" =~ ^[a-z] ]]; then
 
   printf "\n"
 
+
   sudo -u postgres createdb "$db_name"
 
   echo -e "${RED}[information]${NC}: ${YL}Your dataBase was successfully created"

@@ -15,57 +15,79 @@
 </head>
 
 <script type='text/template' class="stockList">
+    <form action="/eat_me" method="POST">
     <div style="width: 600px;" class="stockTable">
         <table class="ui celled table">
             <thead>
                 <tr>
                     <th>Name</th>
                     <th>Qty</th>
+                    <th>Eat</th>
                 </tr>
             </thead>
             <tbody>
                 {{#each stock}}
                 <tr>
+                    
                     <td data-label="Name">{{this.name}}</td>
                     <td data-label="Age">{{this.qty}}</td>
+                    
+                    <td data-label="Name"> <button type="submit" name="{{this.name}}" class="ui positive basic button">Chow!!</button> </td>
                 </tr>
+
 
                 {{/each}}
             </tbody>
         </table>
     </div>
+</form>
+
 </script>
 
 
 <script type='text/template' class="addStock">
-    <a style="padding-top: 20px;" href="stock"><i class="left arrow icon divider"></i>back</a>
-    
-    <form action="/add_choco" method="POST">
-        <div class="ui mini icon input">
-            <input class="item" name="item" type="text" placeholder="add chocolate">
-            <i class="search number"></i>
-          </div>
-          <label for="">qty</label>
-          <input name="qty" class="form-control-sm qty" type="number" value="0" data-decimals="0" min="0" max="1000" step="1"/>
-          <button type="submit" class="ui primary button updateStock">
-            Add
-          </button>
-    </form>
- 
-    
+<a style="padding-top: 20px;" href=""><i class="arrow left icon"></i>back</a>
+
+<form action="/add_choco" method="POST">
+    <div class="ui mini icon input">
+        <input class="item" name="item" type="text" placeholder="add chocolate">
+        <i class="search number"></i>
+    </div>
+    <label for="">qty</label>
+    <input name="qty" class="form-control-sm qty" type="number" value="0" data-decimals="0" min="0" max="1000"
+        step="1" />``
+    <button type="submit" data-inverted="" data-tooltip="{{this.message}}" data-position="top center" class="ui primary button updateStock">
+        Add
+    </button>
+
+    <!-- <div type="submit" class="ui button" data-inverted="" data-tooltip="Add users to your feed" data-position="top center">
+        Add
+      </div> -->
+</form>
+
+
+</script>
+
+<script type='text/template' class="eatChoco">
+    <div class="ui search">
+        <input class="prompt" type="text" placeholder="">
+        <div class="results"></div>
+      </div>
+
 </script>
 
 <body>
-
     <div class="container">
-        <h1>Welcome to chocolate stock tracker</h1>
+        <h1 style="padding-left: 35%;">Chocolate stock tracker</h1>
 
         <div class="ui raised very padded text container segment mainContent">
+
             <!-- display content -->
         </div>
-
-        <button class="positive ui button add">Add chocolate</button>
-        <button class="negative ui button eat">Eat chocolate</button>
+        <div class="" style="padding-left: 19%;">
+            <button class="positive ui button add">Update Stock</button>
+        </div>
+        <!-- <button class="negative ui button eat">Eat chocolate</button> -->
     </div>
 
 

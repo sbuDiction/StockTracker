@@ -2,6 +2,9 @@ package stock.tracker.database;
 
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.sqlobject.SqlObjectPlugin;
+import spark.Service;
+import stock.tracker.exceptions.ChocolateQtyUpdatedException;
+import stock.tracker.exceptions.EatingChocolateException;
 import stock.tracker.mappings.ChocolateMapping;
 
 import java.net.URISyntaxException;
@@ -9,13 +12,14 @@ import java.util.List;
 
 import static spark.Spark.port;
 
+
 public class DataAccessObjectImplementation implements DataAccessObject {
     private final Jdbi jdbi = StockDatabaseConnection.getJdbiDatabaseConnection();
 
     public DataAccessObjectImplementation() throws URISyntaxException {
         try {
-
             jdbi.installPlugin(new SqlObjectPlugin());
+//            port(StockDatabaseConnection.getHerokuAssignedPort());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -38,12 +42,19 @@ public class DataAccessObjectImplementation implements DataAccessObject {
 
 
     @Override
-    public void updateQty(int qty, String name) {
+    public void eatChocolate(String name) throws EatingChocolateException {
         jdbi.useExtension(DataAccessObject.class, dao -> {
-            if (dao.getChocolate(name).size() != 0) {
+            dao.eatChocolate(name);
+        });
+    }
 
+    @Override
+    public void updateStock(String name) throws ChocolateQtyUpdatedException {
+        jdbi.useExtension(DataAccessObject.class, dao -> {
+            if (dao.getChocolate(name).size() == 1) {
+                dao.updateStock(name);
+                throw new ChocolateQtyUpdatedException(name);
             }
-            dao.updateQty(qty, name);
         });
     }
 

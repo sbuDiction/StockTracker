@@ -17,11 +17,23 @@ const getStock = () => {
         console.log(response.data);
         let showHtml = stockListCompiler({ stock: response.data })
         pageContent.innerHTML = showHtml;
+        for (let x = 0; x < response.data.length; x++) {
+            const element = response.data[x];
+            console.log(element.qty);
+            if (element.qty <= 10) {
+                console.log("stock low");
+            } else if (element.qty >= 5) {
+                console.log("stock very low");
+
+            }
+        }
+
     })
 }
 
 window.onload = () => {
     getStock();
+
 }
 
 addButton.addEventListener('click', () => {
@@ -39,10 +51,7 @@ updateStock.addEventListener('click', () => {
 
     axios.post('/add_choco', params).then(results => {
         console.log(results.data);
-        
+
     })
 })
 
-eatButton.addEventListener('click', () => { 
-    
-})

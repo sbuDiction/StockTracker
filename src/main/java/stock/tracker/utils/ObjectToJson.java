@@ -3,7 +3,7 @@ package stock.tracker.utils;
 import com.google.gson.Gson;
 import spark.ResponseTransformer;
 
-public class Serializer implements ResponseTransformer {
+public class ObjectToJson implements ResponseTransformer {
 
     private Gson gson = new Gson();
 
